@@ -22,7 +22,7 @@
 
 ### References
 
-Steps from Guide: [learnk8s.io/terraform-aks](https://learnk8s.io/terraform-aks)
+These notes are inspired by this Guide: [learnk8s.io/terraform-aks](https://learnk8s.io/terraform-aks)
 
 ## Kubernetes and GitHub Container Registry setup
 
