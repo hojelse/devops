@@ -35,4 +35,11 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   identity {
     type = "SystemAssigned"
   }
+
+  # AKS addon to enable the use of Ingress controller
+  addon_profile {
+    http_application_routing {
+      enabled = true
+    }
+  }
 }

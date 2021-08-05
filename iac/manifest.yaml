@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  selector:
+    matchLabels:
+      name: my-app
+  template:
+    metadata:
+      labels:
+        name: my-app
+    spec:
+      containers:
+        - name: creative-nest
+          image: ghcr.io/hojelse/creative-nest:latest
+          ports:
+            - containerPort: 3000
+      imagePullSecrets:
+        # See setup notes for creating the secret
+      - name: creative-nest-pull-secret-gh-auth
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  type: ClusterIP
+  selector:
+    name: my-app
+  ports:
+  - port: 80
+    targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: my-ingress
+  annotations:
+    # Selects the right Ingress controller
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  backend:
+    serviceName: my-service
+    servicePort: 80
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: my-service
+              servicePort: 80
