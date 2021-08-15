@@ -8,12 +8,13 @@
 4. Link your account to the Azure CLI `az login`
 5. Get "id" from `az account list`
 6. Create a Contributor Service Principal `az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<id>"` and get "appId", "password", and "tenant"
-7. Using powershell set environment variables ```
-   $Env:ARM_CLIENT_ID = "<appId>"
-   $Env:ARM_SUBSCRIPTION_ID = "<id>"
-   $Env:ARM_TENANT_ID = "<tenant>"
-   $Env:ARM_CLIENT_SECRET = "<password>"
-   ```
+7. Using powershell set environment variables
+```
+$Env:ARM_CLIENT_ID = "<appId>"
+$Env:ARM_SUBSCRIPTION_ID = "<id>"
+$Env:ARM_TENANT_ID = "<tenant>"
+$Env:ARM_CLIENT_SECRET = "<password>"
+```
 8. Initialize Terraform (downloads Azure provider translate the Terraform instructions into API calls and create state file) `terraform init`
 9. Move the generated config file `mv .\kubeconfig ~\.kube\config`
 10. Checks if the configuration is valid `terraform validate`
